@@ -1,0 +1,10 @@
+{% extends 'base/base_user.html' %}
+
+{% block title %}Blog List{% endblock %}
+{% block content-main %}
+{% for blog in blogs %}
+<p>----------------------</p>
+{% include 'blogs/blog_detail_tmp.html' %}
+<p>----------------------</p>
+{% endfor %}
+{% endblock %}

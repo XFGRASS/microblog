@@ -1,0 +1,26 @@
+{% extends 'base/base_user.html' %}
+
+{% block title %}Profile{% endblock %}
+{% block content-main %}
+<p>Profile page of {{ the_user.nickname }}</p>
+<div class="follow-action">
+	<a href="{% url 'accounts:follow_action' pk=the_user.pk %}">
+	{% if the_user in user.following.all %}
+	取关他
+	{% else %}
+	关注他
+	{% endif %}	
+	</a>	
+</div>
+<div class="blog-list">
+	<a href="{% url 'microblogs:blogs' pk=the_user.pk %}">他的微博</a>
+</div>
+<div class="following-list">
+	他关注的
+	<a href="{% url 'accounts:profile:following' pk=the_user.pk %}">{{ the_user.following.count }}</a>
+</div>
+<div class="follower-list">
+	他的粉丝
+	<a href="{% url 'accounts:profile:followers' pk=the_user.pk %}">{{ the_user.followers.count }}</a>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base/base_no_user.html' %}
+
+{% block title %}Sign up{% endblock %}
+{% block content-main %}
+<div id='signup'>
+	<h3>Sign up</h3>
+	<div id='errors'>
+		{{ form.errors }}
+	</div>
+	<form method="post">{% csrf_token %}
+		<input type="hidden" name='next' value="{{ next }}" />
+		<div>{{ form.non_field_errors }}</div>
+		{% for f in form  %}
+		<div>
+		<label id={{f.id}}>{{ f.label }}: </label>
+		{{ f }}
+		<p>{{ f.errors }}</p>
+		</div>
+		{% endfor  %}
+		<button type="submit">Sign up</button>
+	</form>
+</div>
+{% endblock %}

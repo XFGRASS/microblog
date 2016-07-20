@@ -1,0 +1,18 @@
+{% extends 'base/base_user.html' %}
+
+{% block title %}Conversations{% endblock %}
+{% block content-main %}
+<a href="{% url 'microblogs:blog_detail:index' pk=comment.blog.pk %}">查看该微博</a>
+{% for child, parent in conversations %}
+<div class='Conversation'>
+	<p>
+	{{ child.date_commented }} ||
+	{{ child.commenter.nickname }}
+	{% if parent %}
+	回复 {{ parent.commenter.nickname }}
+	{% endif %}
+	: {{ child.content_text }}
+	</p>
+</div>
+{% endfor %}
+{% endblock %}

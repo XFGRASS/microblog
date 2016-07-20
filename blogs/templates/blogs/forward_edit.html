@@ -1,0 +1,18 @@
+{% extends 'base/base_user.html' %}
+
+{% block title %}Forward Edit{% endblock %}
+{% block content-main %}
+<p>正在转发 {{blog.user.nickname}} 的微博</p>
+<form method="POST">
+{% csrf_token %}
+	<div>{{ form.non_field_errors }}</div>
+	{% for f in form %}
+	<label id={{ f.id }}>{{ f.label }}: </label>
+	<div>{{ f }}</div>
+	<div>{{ f.errors }}</div>
+	{% endfor %}
+	<div>
+	<button type="submit">转发</button>
+	</div>
+</form>
+{% endblock %}

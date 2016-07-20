@@ -1,0 +1,67 @@
+<div class="blog_area">
+	<div class="blog_detail">
+		<div class="blog_author">
+			<a href="{% url 'accounts:profile:index' pk=blog.user.pk %}">{{ blog.user.nickname }}</a> -----
+			<div class="follow_author" style="display:inline">
+			<a href="{% url 'accounts:follow_action' pk=blog.user.pk %}">
+			{% if blog.user in user.following.all %}
+			取关他
+			{% else %}
+			关注他
+			{% endif %}	
+			</a>
+			</div>
+		</div>
+		<a href="{% url 'microblogs:blog_detail:index' pk=blog.pk  %}">{{ blog.content_text }}</a>
+		{% if blog.is_forwarded %}
+		<p>++++++++++++</p>
+		<p>原微博: </p>
+		<p class="blog_author">
+		<a href="{% url 'accounts:profile:index' pk=blog.source_blog.user.pk %}">{{ blog.source_blog.user.nickname }}</a>: 
+		<a href="{% url 'microblogs:blog_detail:index' pk=blog.source_blog.pk  %}">{{ blog.source_blog.content_text }}</a>
+		</p>
+		<p>++++++++++++</p>
+		{% endif %}
+		<p class="date_blogged">{{ blog.date_blogged }}</p>
+	</div>
+	<div class="interactive_area">
+		| <div class="forwarded" style="display:inline;">
+			<span>
+			<a href="{% url 'microblogs:interactive:forward_blog' pk=blog.pk %}">
+			转发:
+			{{ blog.forwarded_count }}
+			{% if blog.forwarded_count > 0 %}
+			<a href="{% url 'microblogs:blog_detail:forwards' pk=blog.pk %}">
+			查看	
+			</a>
+			{% endif %}
+			</a>
+			</span>
+		</div> |
+		| <div class="comments" style="display:inline;">
+			<span>
+			<a href="{% url 'microblogs:interactive:comment_blog' pk=blog.pk %}">
+			评论:
+			{{ blog.comments_count }}
+			</a>
+			{% if blog.comments_count > 0 %}
+			<a href="{% url 'microblogs:blog_detail:comments' pk=blog.pk %}">
+			查看	
+			</a>
+			{% endif %}
+			</span>
+		</div> |
+		| <div class="liked" style="display:inline;">
+			<span>
+			<a href="{% url 'microblogs:interactive:like_blog_action' pk=blog.pk %}">
+			{% if user in blog.liked_users %}
+			已点赞:
+			{% else %}
+			点赞:
+			{% endif %}
+			{{ blog.liked_count }}
+			</a>
+			</span>
+		</div> |
+	</div>
+</div>

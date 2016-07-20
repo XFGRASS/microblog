@@ -1,0 +1,32 @@
+{% extends 'base/base_user.html' %}
+
+{% block title %}Likes{% endblock %}
+
+{% block content-main %}
+{% for like_record in like_records %}
+<div class="likes">
+---------------------------------------
+	<p id='like_record'>	
+	{% if like_record.user.pk == user.pk %}
+	你
+	{% else %}
+	{{ like_record.user.nickname }}
+	{% endif %}
+	赞了
+	{% if like_record.blog.user.pk == user.pk %}
+	你
+	{% else %}
+	<a href="{% url 'accounts:profile:index' pk=like_record.blog.user.pk %}">
+	{{ like_record.blog.user.nickname }}	
+	</a>
+	{% endif %}
+	的微博:
+	</p>
+	<p id='blog_content'>
+	<a href="{% url 'microblogs:blog_detail:index' pk=like_record.blog.pk %}">{{ like_record.blog.content_text }}</a>
+	</p>
+	<p id='date_liked'>{{ like_record.date_liked }}</p>
+---------------------------------------
+</div>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<header>
+{% block header %}
+	<ul>
+		<li>
+		User:
+		{{ user.nickname }}
+		</li>
+		<li><a href="{% url 'accounts:home' %}">首页</a></li>
+		<li><a href="{% url 'accounts:profile:index' pk=user.pk %}">个人中心</a></li>
+		<li><a href="{% url 'accounts:notifications:index' %}">通知中心</a></li>
+		<li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+	</ul>
+{% endblock %}	
+</header>
+<p>=====================CONTENT-MAIN=====================</p>
+<article>{% block content-main %}{% endblock %}</article>
+{% endblock %}

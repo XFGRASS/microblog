@@ -1,0 +1,9 @@
+{% extends 'base/base_user.html' %}
+
+{% block title %}Home{% endblock %}
+{% block content-main %}
+<ul>
+	<li><a href="{% url 'microblogs:create' %}">发个微博</a></li>
+	<li><a href="{% url 'microblogs:feeds' %}">微博动态</a></li>
+</ul>
+{% endblock %}

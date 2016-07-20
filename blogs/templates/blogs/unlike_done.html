@@ -1,0 +1,7 @@
+{% extends 'base/base_user.html' %}
+
+{% block title %}取消赞成功{% endblock %}
+{% block content-main %}
+<p>已取消赞 -1</p>
+<a href="{% url 'microblogs:blog_detail:index' pk=blog.pk %}">返回查看</a>
+{% endblock %}

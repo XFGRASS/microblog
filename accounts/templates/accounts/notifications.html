@@ -1,0 +1,12 @@
+{% extends 'base/base_user.html' %}
+
+{% block title %}Notifications{% endblock %}
+{% block content-main %}
+<ul>
+	<li><a href="{% url 'accounts:notifications:received_comments' %}">收到的评论</a></li>
+	<li><a href="{% url 'accounts:notifications:commented_records' %}">我评论过的</a></li>
+	<li><a href="{% url 'accounts:notifications:got_likes' %}">得到的赞</a></li>
+	<li><a href="{% url 'accounts:notifications:liked_records' %}">我赞过的</a></li>
+	<li><a href="{% url 'accounts:notifications:got_forwards' %}">被转发的微博</a></li>
+</ul>
+{% endblock %}

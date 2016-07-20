@@ -1,0 +1,44 @@
+{% extends 'base/base_user.html' %}
+
+{% block title %}Comments of blog{% endblock %}
+{% block content-main %}
+{% include 'blogs/blog_detail_tmp.html' with blog=blog %}
+<p>============Comments============</p>
+{% for comment in comments %}
+{% with pk=comment.pk commenter=comment.commenter content=comment.content_text date_commented=comment.date_commented parent_comment=comment.parent_comment parent_commenter=comment.parent_comment.commenter %}
+<p>---------------------------------------------</p>
+<div class="comment-area">
+	<div class="commenter" style="display:inline;">
+		<a href="{% url 'accounts:profile:index' pk=commenter.pk %}">
+		{{ commenter.nickname }}
+		</a>
+		{% if parent_comment %}
+		回复
+		<a href="{% url 'accounts:profile:index' pk=parent_commenter.pk %}">
+		{{ parent_commenter.nickname }}
+		</a>
+		{% endif %}
+	</div>:
+	<div class="comment-content" style="display:inline;">
+	{{ content }}
+	</div>
+	<div class="comment-date">
+	{{ date_commented }}	
+	</div>
+	<div class="reply-comment">
+		<a href="{% url 'microblogs:comment_detail:reply_comment' pk=comment.pk %}">
+		回复
+		</a>
+	</div>
+	{% if parent_comment %}
+	<div class="conversations">
+	<a href="{% url 'microblogs:comment_detail:conversations' pk=comment.pk %}">
+	查看对话
+	</a>
+	</div>
+	{% endif %}
+</div>
+<p>---------------------------------------------</p>
+{% endwith %}
+{% endfor %}
+{% endblock %}

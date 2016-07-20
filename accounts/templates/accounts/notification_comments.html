@@ -1,0 +1,54 @@
+{% extends 'base/base_user.html' %}
+
+{% block title %}Comments{% endblock %}
+{% block content-main %}
+{% for comment in comments %}
+	{% with commenter=comment.commenter blog=comment.blog content=comment.content_text parent_comment=comment.parent_comment date_commented=comment.date_commented %}
+	<div class="comment">
+	----------------------------------------
+		<p class="commenter">
+		<a href="{% url 'accounts:profile:index' pk=commenter.pk %}">
+		{{ commenter.nickname }}
+		</a>
+		</p>
+		<p class="comment_content">
+		{% if parent_comment %}
+		回复 
+		<a href="{% url 'accounts:profile:index' pk=parent_comment.commenter.pk %}">
+		{{ parent_comment.commenter.nickname }}:
+		</a>
+		{% endif %}
+
+		{{ content }}
+		</p>
+		<p class="comment_for">
+		[
+		这是
+		{% if parent_comment %}
+		回复给
+		<a href="{% url 'accounts:profile:index' pk=parent_comment.commenter.pk %}">
+		{{ parent_comment.commenter.nickname }}
+		</a>
+		的评论: 
+		{{ parent_comment.content_text }}
+		{% else %}
+		评论给
+		<a href="{% url 'accounts:profile:index' pk=blog.user.pk %}">
+		{{ blog.user.nickname }}
+		</a>
+		的微博: 
+		<a href="{% url 'microblogs:blog_detail:index' pk=blog.pk %}">
+		{{ blog.content_text }}
+		</a>
+		{% endif %}
+		]
+		</p>
+		<p class="date_commented">{{ comment.date_commented }}</p>	
+		{% if parent_comment %}
+		<p><a href="{% url 'microblogs:comment_detail:conversations' pk=comment.pk %}">查看对话</a></p>
+		{% endif %}
+	----------------------------------------
+	</div>
+	{% endwith %}
+{% endfor %}
+{% endblock %}

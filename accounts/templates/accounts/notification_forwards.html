@@ -1,0 +1,10 @@
+{% extends 'base/base_user.html' %}
+
+{% block title %}Forwards{% endblock %}
+{% block content-main %}
+{% for forward in forwards %}
+<p>======================</p>
+{% include 'blogs/blog_detail_tmp.html' with blog=forward.forwarded_blog %}
+<p>======================</p>
+{% endfor %}
+{% endblock %}

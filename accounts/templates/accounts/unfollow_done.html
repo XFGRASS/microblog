@@ -1,0 +1,8 @@
+{% extends 'base/base_user.html' %}
+
+{% block title %}Follow done{% endblock %}
+{% block content-main %}
+<h3>您已取关: 
+<a href="{% url 'accounts:profile:index' pk=target.pk %}">{{ target.nickname }}</a>
+</h3>
+{% endblock %}

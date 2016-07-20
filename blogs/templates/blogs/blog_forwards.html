@@ -1,0 +1,26 @@
+{% extends 'base/base_user.html' %}
+
+{% block title %}Forwards of blog{% endblock %}
+{% block content-main %}
+{% include 'blogs/blog_detail_tmp.html' with blog=blog %}
+<p>============Forwards============</p>
+{% for forward in forwards %}
+<p>---------------------------------------------</p>
+<div class="forward-area">
+	<div class="forwarder" style="display:inline;">
+		<a href="{% url 'accounts:profile:index' pk=forward.forwarder.pk %}">
+		{{ forward.forwarder }}:	
+		</a>
+	</div>
+	<div class="forward-comment" style="display:inline">
+		<a href="{% url 'microblogs:blog_detail:index' pk=forward.forwarded_blog.pk %}">
+		{{ forward.forwarded_blog.content_text }}	
+		</a>
+	</div>
+	<div class="'forwarded-date">
+	{{ forward.date_forwarded }}	
+	</div>
+</div>
+<p>---------------------------------------------</p>
+{% endfor %}
+{% endblock %}

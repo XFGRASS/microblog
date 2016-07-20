@@ -1,0 +1,17 @@
+{% extends "base/base_user.html" %}
+
+{% block title %}Edit blog{% endblock %}
+{% block content-main %}
+<form method="post" enctype="multipart/form-data">{% csrf_token %}
+	<div>{{ blog_form.non_field_errors }}</div>
+	{% for f in blog_form  %}
+	<label id={{ f.id }}>{{ f.label }}: </label>
+	<div>{{ f }}</div>
+	<div>{{ f.errors }}</div>
+	{% endfor %}
+	<input type="file" name="blog_images" multiple="multiple">
+	<div>
+	<button type="submit">发布</button>
+	</div>
+</form>
+{% endblock %}

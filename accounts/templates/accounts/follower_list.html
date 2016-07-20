@@ -1,0 +1,13 @@
+{% extends "base/base_user.html" %}
+
+{% block title %}Followers{% endblock %}
+{% block content-main %}
+<p>
+关注<a href="{% url 'accounts:profile:index' pk=the_user.pk %}">{{ the_user.nickname }}</a>的人:
+</p>
+<div class="follower-list">
+	{% for follower in followers %}
+	<a href="{% url 'accounts:profile:index' pk=follower.pk %}">{{ follower.nickname }}</a>
+	{% endfor %}
+</div>
+{% endblock %}
